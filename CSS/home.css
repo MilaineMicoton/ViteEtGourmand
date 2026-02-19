@@ -1,0 +1,133 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.gauche {
+    width:50%;
+    padding:10px;
+}
+
+.droite {
+    width:50%;
+    padding:10px;
+    
+}
+
+.droite {text-align: center;}
+
+img {max-width: 100%;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+p { 
+    text-align: center;
+        font-size: 1.2rem;}
+
+
+
+.styled {
+    border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  border-radius: 10px;
+  background-color: #004160;
+  background-image: linear-gradient(
+    to top left,
+    rgb(0 0 0 / 0.2),
+    rgb(0 0 0 / 0.2) 30%,
+    transparent
+  );
+  box-shadow:
+    inset 2px 2px 3px rgb(255 255 255 / 0.6),
+    inset -2px -2px 3px rgb(0 0 0 / 0.6);
+}
+
+.styled:hover {
+  background-color: rgb(105, 6, 6);
+}
+
+.styled:active {
+  box-shadow:
+    inset -2px -2px 3px rgb(255 255 255 / 0.6),
+    inset 2px 2px 3px rgb(0 0 0 / 0.6);
+}
+.bouton-menus {
+    width:120px;
+    height:40px;
+    border-radius: 10px;
+    background-color:#004160;
+    text-align: center;
+    padding:10px 0 0 0; 
+    margin:auto;
+}
+
+.bouton-menus > a {
+    text-decoration: none;
+    border:0;
+    background-color:#004160;
+    color: white;
+    padding:0;
+}
+
+/* ------------------------les media queries-------------------------- */
+/*-------------------------------------------------------------------- */
+
+/* marges extérieures sur le body selon la taille de l'écran 
+
+@media screen and (width <=800px) {
+body {
+    margin: 0 40px 0 40px;
+}
+.gauche, .droite{
+    width: 100%;
+}
+}
+
+@media screen and (width<= 426px) {
+body {
+    margin: 0 20px 0 20px;
+}
+
+}
+
+@media screen and (width>=801px) {
+nav ul li a {
+    padding: 20px 10px 20px 10px;
+
+}
+}
+@media screen and (width >=1400px) {
+body {
+    margin: 0 70px 0 70px;
+}
+
+}
+
+/* ---------------taille des polices pour les tel portables -------- 
+
+@media screen and (width <= 520px){
+    a {
+        font-size: 0.8em;
+    }
+}
+    */
+@media screen and (width <=800px) {
+
+.gauche, .droite{
+    width: 100%;
+}
+}

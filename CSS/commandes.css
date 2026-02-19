@@ -1,0 +1,65 @@
+h1{
+    text-align:center;
+    margin-top:20px;
+}
+.cadre-menu {
+    width: 300px;
+    padding:10px;
+}
+.cadre-commande {
+    width: 350px;
+    padding:10px;
+}
+.wrapper-commande {
+    display: flex;
+    max-width: 100vw;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+.cadre-menu {
+    border: 2px solid #004160;
+    border-radius: 10px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    margin-top:32px;
+    margin-rightt: 20px;
+}
+.cadre-commande {
+    border: 2px solid #004160;
+    border-radius: 10px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    margin-top:32px;
+    margin-left: 20px;
+}
+.cadre-menu img {
+    width:100%;
+}
+label {
+    padding-right: 5px;
+}
+textarea {
+    width: 300px;
+    height: 4rem;
+}
+.bouton-valider {
+    width:100px;
+    height:30px;
+    border-radius: 10px;
+    background-color:#004160;
+    text-align: center;
+    padding:5px 0 0 0;  
+    margin:auto;
+}
+
+.bouton-valider > button {
+    text-decoration: none;
+    border:0;
+    background-color:#004160;
+    color: white;
+    padding:0;
+}
+ 

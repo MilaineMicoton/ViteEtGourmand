@@ -1,0 +1,52 @@
+.inscription {
+  border: 2px solid rgb(95 97 110);
+  border-radius: 0.5em;
+  padding: 20px;
+  width: auto;
+  background-color: #eab993;
+}
+
+.insc-wrapper {
+  font: 1.2em sans-serif;
+  padding:20px 0 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ****************** bouton *********************************** */
+.submit-button {
+  margin: 0 36% 0 36%;
+}
+
+.submit-button > input {
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  border-radius: 10px;
+  background-color:#004160;
+  background-image: linear-gradient(
+    to top left,
+    rgb(0 0 0 / 0.2),
+    rgb(0 0 0 / 0.2) 30%,
+    transparent
+  );
+  box-shadow:
+    inset 2px 2px 3px rgb(255 255 255 / 0.6),
+    inset -2px -2px 3px rgb(0 0 0 / 0.6);
+}
+
+.styled:hover {
+  background-color: rgb(105, 6, 6);
+}
+
+.styled:active {
+  box-shadow:
+    inset -2px -2px 3px rgb(255 255 255 / 0.6),
+    inset 2px 2px 3px rgb(0 0 0 / 0.6);
+}
+
