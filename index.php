@@ -1,5 +1,10 @@
-<!-- inclusion des variables et fonctions -->
-
+<?php
+// ceci est pour débugger uniquement, à remplacer par une limite sur le temps de session ou des variables? à étudier*****
+session_start();
+session_unset();
+echo 'session (re)démarrée, mais variables de session détruites';
+// fin deboggage 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,8 +34,8 @@ require_once (__DIR__."/includes/footer.php");
 session_start();
 require_once(__DIR__ . '/config/mysql.php');
 require_once(__DIR__ . '/includes/databaseconnect.php');
-require_once(__DIR__ . '/includes/variables.php');
-require_once(__DIR__ . '/includes/functions.php');
+
+
 ?>
 
 

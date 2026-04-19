@@ -1,3 +1,26 @@
+<!-- inclusion des variables et fonctions --> 
+<?php
+session_start();
+require_once(__DIR__ . '/../config/mysql.php');
+require_once(__DIR__ . '/../includes/databaseconnect.php');
+
+if(isset($_POST['Envoi'])){
+    // ******* si envoyé, on garde les valeurs saisies dans des variables *******
+    echo $adresseMail  = $_POST['adresse-mail'];
+    echo $motdepasse  = $_POST['mot-de-passe'];
+    echo $nom = $_POST['nom'];
+    echo $prenom = $_POST['prenom'];
+    echo $telephone = $_POST['telephone'];
+    echo $adresse = $_POST['adresse-postale'];
+    echo $ville = $_POST['ville'];
+
+    // ********************on recherche la table utilisateur pour une entrée existante avec cette adresse mail **********
+    $statement = $mysqlClient->prepare("SELECT email FROM utilisateur WHERE email = '$adresseMail'");
+    $statement->execute();
+    $tableUtilisateur = $statement->fetchAll(PDO::FETCH_ASSOC);
+} 
+?>
+<!-------------------------------le code html commence ici -------------------------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +58,28 @@ require_once (__DIR__."/../includes/header.php");
                             <a href="connexion.php">Connectez-vous</a>
                         </div> 
 <br>
-<br>
+<?php
+//********si l'adresse mail est nouvelle, on inscrit l'utilisateur et on confirme à l'écran  *******/
+if (isset($_POST['Envoi'])){
+    if (empty($tableUtilisateur)){
+        $sqlInsert = "INSERT INTO utilisateur (email, password, nom, prenom, telephone, ville, adresse) 
+        VALUES ('$adresseMail', '$motdepasse', '$nom', '$prenom', '$telephone', '$ville', '$adresse')";
+        $mysqlClient->exec($sqlInsert);
+        echo " <style>h4{color:red;} </style>";
+    ?>
+        <h4>Bienvenue à Vite et Gourmand!<br>Vous pouvez commander 
+        <a href="../pages/menus.php">nos menus</a></h4>
+    <?php
+//********si l'adresse mail est déjà dans la db, on retourne l'erreur à l'utilisateur *******/
+        } else {
+         echo " <style>h4{color:red;} </style>";
+    ?>
+        <h4>Bonjour! Déjà inscrit, corrigez l'adresse mail ou connectez-vous!</h4> 
+        
+    <?php
+    }};
+    ?>
+
 <br>                                     
                         <ion-icon name="mail-outline" id="mail-outline"></ion-icon>
                         <label for="adresse-mail">Votre adresse mail</label>
@@ -79,9 +123,15 @@ require_once (__DIR__."/../includes/header.php");
 <br>
 <br>
 <br>
+                        <label for="ville">Ville&nbsp&nbsp&nbsp</label>
+                        <input type="text" id="insc-ville" name="ville" required
+                            placeholder="" size="30" maxlength="30">
+<br>
+<br>
+<br>
 
                         <div class="submit-button">
-                        <input type="submit" value="Validez" maxlength="20">
+                        <input type="submit" value="Validez" name="Envoi" maxlength="20">
                         </div>                       
                     </form>
 

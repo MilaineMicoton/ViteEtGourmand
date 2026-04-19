@@ -2,33 +2,149 @@
 CREATE DATABASE IF NOT EXISTS `viteetgourmand`;
 USE `viteetgourmand`;
 
--- Création de la table recipes
-CREATE TABLE IF NOT EXISTS `recipes` (
-    `recipe_id` int(11) NOT NULL AUTO_INCREMENT,
-    `title` varchar(128) NOT NULL,
-    `recipe` TEXT NOT NULL,
-    `author` varchar(255) NOT NULL,
-    `is_enabled` BOOLEAN NOT NULL,
-    PRIMARY KEY (`recipe_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+--
+-- Base de données : `viteetgourmand`
+--
 
--- Création de la table users
-CREATE TABLE IF NOT EXISTS `users` (
-    `user_id` int(11) NOT NULL AUTO_INCREMENT,
-    `full_name` varchar(64) NOT NULL,
-    `email` varchar(255) NOT NULL,
-    `password` varchar(255) NOT NULL,
-    `age` INT NOT NULL,
-    PRIMARY KEY (`user_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- --------------------------------------------------------
 
-delete from `users`;
-insert into `users` (`age`, `email`, `full_name`, `password`, `user_id`) values (34, 'mickael.andrieu@exemple.com', 'Mickaël Andrieu', 'devine', 1);
-insert into `users` (`age`, `email`, `full_name`, `password`, `user_id`) values (34, 'mathieu.nebra@exemple.com', 'Mathieu Nebra', 'MiamMiam', 2);
-insert into `users` (`age`, `email`, `full_name`, `password`, `user_id`) values (28, 'laurene.castor@exemple.com', 'Laurène Castor', 'laCasto28', 3);
+--
+-- Structure de la table `commande`
+--
 
-delete from `recipes`;
-insert into `recipes` (`author`, `is_enabled`, `recipe`, `recipe_id`, `title`) values ('mickael.andrieu@exemple.com', 1, "Le cassoulet est une spécialité régionale du Languedoc, à base de haricots secs, généralement blancs, et de viande. À son origine, il était à base de fèves. Le cassoulet tient son nom de la cassole en terre cuite émaillée dite caçòla1 en occitan et fabriquée à Issel.\n", 1, 'Cassoulet');
-insert into `recipes` (`author`, `is_enabled`, `recipe`, `recipe_id`, `title`) values ('mickael.andrieu@exemple.com', 0, "Le couscous est d'une part une semoule de blé dur préparée à l'huile d'olive (un des aliments de base traditionnel de la cuisine des pays du Maghreb) et d'autre part, une spécialité culinaire issue de la cuisine berbère, à base de couscous, de légumes, d'épices, d'huile d'olive et de viande (rouge ou de volaille) ou de poisson.", 2, 'Couscous');
-insert into `recipes` (`author`, `is_enabled`, `recipe`, `recipe_id`, `title`) values ('laurene.castor@exemple.com', 0, "La salade César est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de « sauce César » à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire.", 4, 'Salade Romaine');
-insert into `recipes` (`author`, `is_enabled`, `recipe`, `recipe_id`, `title`) values ('mathieu.nebra@exemple.com', 1, "L'escalope à la milanaise, ou escalope milanaise est une escalope panée, de viande de veau, traditionnellement prise dans le faux-filet. Historiquement, on la cuit avec du beurre. Elle est généralement servie avec salade ou frites, accompagnée de sauce mayonnaise. On peut y ajouter un filet de jus de citron.\n\nEn Italie, ce mets ne se sert pas avec des pâtes.", 3, 'Escalope milanaise');
+CREATE TABLE IF NOT EXISTS `commande` (
+  `commande_id` int(11) NOT NULL,
+  `date_commande` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `date_prestation` date NOT NULL,
+  `heure_livraison` varchar(50) NOT NULL,
+  `prix_menu` double NOT NULL,
+  `nombre_personne` int(11) NOT NULL,
+  `prix_livraison` double NOT NULL,
+  `statut` varchar(50) NOT NULL,
+  `pret_materiel` tinyint(1) NOT NULL,
+  `restitution_materiel` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- faire table rase si elle existait déjà
+
+delete from `commande`;
+
+--
+-- Déchargement des données de la table `commande`
+--
+-- ************************* A REMPLIR ICI:::::::: les données de 'commande' ***********
+
+
+-- --------------------------------------------------------
+--
+-- Structure de la table `menu`
+-- 
+
+CREATE TABLE IF NOT EXISTS `menu` (
+  `menu_id` int(11) NOT NULL,
+  `titre` varchar(50) NOT NULL,
+  `sous_titre` varchar(50) NOT NULL,
+  `nbre_personne-min` int(11) NOT NULL,
+  `prix_par_personne` double NOT NULL,
+  `regime` varchar(50) NOT NULL,
+  `menu_ligne1` varchar(50) NOT NULL,
+  `menu_ligne2` varchar(50) NOT NULL,
+  `menu_ligne3` varchar(50) NOT NULL,
+  `menu_ligne4` varchar(50) NOT NULL,
+  `menu_ligne5` varchar(50) NOT NULL,
+  `quantite_restante` int(11) NOT NULL,
+  `url_photo` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- faire table rase si elle existait déjà
+
+delete from `menu`;
+
+--
+-- Déchargement des données de la table `menu`
+--
+
+INSERT INTO `menu` (`menu_id`, `titre`, `sous_titre`, `nbre_personne-min`, `prix_par_personne`, `regime`, `menu_ligne1`, `menu_ligne2`, `menu_ligne3`, `menu_ligne4`, `menu_ligne5`, `quantite_restante`, `url_photo`) VALUES
+(1, 'Le classique', 'Un repas traditionnel', 1, 12, 'général', 'Soupe', 'Viande', 'Légumes', 'Fromage', 'Dessert', 10, '../images/circles-9451627_640.jpg'),
+(2, 'Le gourmand', 'Pour les bons appétits', 2, 22, 'général', 'Appéro (boisson et grignotage)', 'Entrée crudités', 'Poisson frais', 'Gibier et légumes', 'Dessert et café', 8, '../images/hearts-9463310_640.jpg'),
+(5, 'La ligne en vue', 'Pour garder la ligne', 1, 18, 'minceur', 'Soupe claire', 'Viande bouillie', 'Légumes vapeur', 'Fromage 0%', 'Dessert sans sucre ajouté', 10, '../images/hearts-9463312_640.jpg'),
+(6, 'Le veggie', 'menu végérarien', 2, 18, 'végétarien', 'Entrée crudités et yahourt', 'Lentilles corail', 'Burger vegétarien', 'Potatoes', 'Café gourmand', 8, '../images/hex-9452616_640.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `utilisateur id` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `telephone` int(50) NOT NULL,
+  `ville` int(50) NOT NULL,
+  `adresse` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- faire table rase si elle existait déjà
+
+delete from `utilisateur`;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+-- ************************* A REMPLIR ICI:::::::: les données de 'utilisateur' ***********
+
+
+-- --------------------------------------------------------
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`commande_id`);
+
+--
+-- Index pour la table `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`menu_id`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`utilisateur id`);
+
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `commande_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  MODIFY `utilisateur id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

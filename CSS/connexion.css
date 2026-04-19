@@ -49,6 +49,11 @@
     inset 2px 2px 3px rgb(0 0 0 / 0.6);
 }
 
+/*********************** message saisie incorrecte ***********/
+h4 {
+  color:#eab993;
+}
+
 /**************************************les média queries*******/
 @media screen and (width <=800px) {
 body {

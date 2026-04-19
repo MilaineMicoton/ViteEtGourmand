@@ -3,7 +3,6 @@
 session_start();
 require_once(__DIR__ . '/../config/mysql.php');
 require_once(__DIR__ . '/../includes/databaseconnect.php');
-require_once(__DIR__ . '/../includes/variables.php');
 
 ?>
 
@@ -68,7 +67,7 @@ foreach ($allMenus as $oneMenu)
         $choixMenuId = $oneMenu['menu_id'];
         ?>
 
-        <form method="post" action="commandes.php">
+        <form method="post" action="passerCommande.php">
             <input type="hidden" name="choixImage" value='<?php echo "$choixImage"?>'/>
             <input type="hidden" name="choixTitre" value='<?php echo "$choixTitre"?>'/>
             <input type="hidden" name="choixSousTitre" value='<?php echo "$choixSousTitre"?>'/>
@@ -80,6 +79,8 @@ foreach ($allMenus as $oneMenu)
             <input type="hidden" name="choixPrixParPersonne" value='<?php echo "$choixPrixParPersonne"?>'/>
             <input type="hidden" name="choixNbrePersonneMin" value='<?php echo "$choixNbrePersonneMin"?>'/>
             <input type="hidden" name="choixMenuId" value='<?php echo "$choixMenuId"?>'/>
+            <input type="hidden" name="statutCommande" value='c nouveau'>
+            <?php $_SESSION['statutCommande'] = "nouvelle";?>
 
 
 
@@ -88,7 +89,6 @@ foreach ($allMenus as $oneMenu)
                 <p class="prix">par personne: <?php echo $oneMenu['prix_par_personne'] ?>€<br>
                 minimum <?php echo $oneMenu['nbre_personne-min'] ?> pers.</p>
                 <div class="bouton-commander">
-                       <!-- <a href="commandes.php">Commander</a> -->
                         <button type="submit">Commander</button>
                 </div>
             </div>

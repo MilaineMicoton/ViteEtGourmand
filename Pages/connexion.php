@@ -1,3 +1,26 @@
+<!-- inclusion des variables et fonctions --> 
+<?php
+session_start();
+
+// on récupère l'id de session s'il existe
+
+$id_session = session_id();
+
+require_once(__DIR__ . '/../config/mysql.php');
+require_once(__DIR__ . '/../includes/databaseconnect.php');
+
+
+if(isset($_POST['envoi'])){
+    echo $adresseMail  = $_POST['adresse-mail'];
+    echo $motdepasse  = $_POST['mot-de-passe'];
+
+    // ********************ici on  sélectionne les données de la table utilisateur**********
+    $statement = $mysqlClient->prepare("SELECT email, password FROM utilisateur WHERE email = '$adresseMail' AND password = '$motdepasse'");
+    $statement->execute();
+    $tableUtilisateur = $statement->fetchAll(PDO::FETCH_ASSOC);
+}  
+?>
+<!-------------------------------le code html commence ici -------------------------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +40,7 @@
 
   <?php
 require_once (__DIR__."/../includes/header.php");
+
 ?>
 
 <main>
@@ -28,13 +52,37 @@ require_once (__DIR__."/../includes/header.php");
                         <h1>Connexion</h1>
 
 <br>
-<br>
+<?php
+//********si la db ne reconnait pas la saisie en retourne l'erreur à l'utilisateur *******/
+if (isset($_POST['envoi'])){
+    if (empty($tableUtilisateur)){
+        echo ' <style>h4{color:red;} </style>';?>
+        <h4>Adresse mail ou mot de passe incorrect</h4>
+       <?php } else {
+        if($id_session){
+            echo 'ID de session récupéré via sessionid : <br>'
+            .$id_session. '<br>';
+            echo '<br>';}
+        if(isset($_COOKIE['PHPSESSID'])){
+            echo 'ID de session récupéré via cookie : <br>'
+            .$_COOKIE['PHPSESSID']. '<br>';
+        echo '<br>';}
+        $_SESSION['email'] = $adresseMail;
+        echo 'le mail de session est '.$_SESSION['email'];
+         echo ' <style>h4{color:black;} </style>';?>
+        <h4>Bonjour!<br>Vous pouvez commander nos
+        <a href="../pages/menus.php">menus</a></h4>
+        
+        <?php
+    }};
+?>
+
 <br>
                  
                         <ion-icon name="mail-outline" id="mail-outline"></ion-icon>
                         <label for="adresse-mail">Votre adresse mail</label>
                         <input type="email" id="adresse-mail" name="adresse-mail" required
-                            placeholder="ex monemail@exemple.fr" size="20" maxlength="20">
+                            placeholder="ex monemail@exemple.fr" size="20" maxlength="30">
                             
 <br>
 <br>
@@ -57,7 +105,7 @@ require_once (__DIR__."/../includes/header.php");
 <br>
 <br> 
                         <div class="submit-button">
-                        <input type="submit" value="Connexion">
+                        <input type="submit" value="Connexion" name="envoi">
                         </div>
 
 <br>
