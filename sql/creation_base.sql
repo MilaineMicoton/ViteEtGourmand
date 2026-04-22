@@ -12,17 +12,17 @@ USE `viteetgourmand`;
 -- Structure de la table `commande`
 --
 
-CREATE TABLE IF NOT EXISTS `commande` (
+CREATE TABLE `commande` (
   `commande_id` int(11) NOT NULL,
+  `utilisateur_id` int(11) NOT NULL,
+  `menu_id` INT(11) NOT NULL,
   `date_commande` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `date_prestation` date NOT NULL,
+  `date_livraison` date NOT NULL,
   `heure_livraison` varchar(50) NOT NULL,
   `prix_menu` double NOT NULL,
   `nombre_personne` int(11) NOT NULL,
-  `prix_livraison` double NOT NULL,
-  `statut` varchar(50) NOT NULL,
-  `pret_materiel` tinyint(1) NOT NULL,
-  `restitution_materiel` tinyint(1) NOT NULL
+  `precision_complement` varchar(70) NOT NULL,
+  `statut` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- faire table rase si elle existait déjà
@@ -33,7 +33,8 @@ delete from `commande`;
 -- Déchargement des données de la table `commande`
 --
 -- ************************* A REMPLIR ICI:::::::: les données de 'commande' ***********
-
+INSERT INTO `commande` (`commande_id`, `utilisateur_id`, `menu_id`, `date_commande`, `date_livraison`, `heure_livraison`, `prix_menu`, `nombre_personne`, `precision_complement`, `statut`) VALUES
+(1, 2, 1, '2026-03-18 09:24:57', '2026-05-31', '11h', 12, 2, '', 'Commande validée');
 
 -- --------------------------------------------------------
 --

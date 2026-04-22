@@ -79,8 +79,8 @@ foreach ($allMenus as $oneMenu)
             <input type="hidden" name="choixPrixParPersonne" value='<?php echo "$choixPrixParPersonne"?>'/>
             <input type="hidden" name="choixNbrePersonneMin" value='<?php echo "$choixNbrePersonneMin"?>'/>
             <input type="hidden" name="choixMenuId" value='<?php echo "$choixMenuId"?>'/>
-            <input type="hidden" name="statutCommande" value='c nouveau'>
-            <?php $_SESSION['statutCommande'] = "nouvelle";?>
+            <input type="hidden" name="statutCommande" value='Nouvelle Commande'>
+            <?php $_SESSION['statutCommande'] = "Nouvelle Commande";?>
 
 
 
@@ -98,7 +98,7 @@ foreach ($allMenus as $oneMenu)
     <?php
     }
 ?> 
-</div>
+</div>d
 <div class="wrapper-les-menus">
 
     <div class="cadre-menu">

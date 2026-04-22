@@ -6,6 +6,13 @@ if(!isset($_SESSION['email'])){
     <script>window.location.replace("http:./connexion.php");</script>
     <?php
 };
+/* debugging time!!
+/*if(isset($_SESSION['utilisateurID'])){*/
+    echo "Voici le contenu session : ";    
+    echo "identifiant utilisateur = " . $_SESSION['utilisateurID'];
+    echo "  email utilisateur = " . $_SESSION['email'];
+    echo "  statut commande = " . $_SESSION['statutCommande'];
+/*} else {echo "erreur id est absent de session";};*/
 
 require_once(__DIR__ . '/../config/mysql.php');
 require_once(__DIR__ . '/../includes/databaseconnect.php');
@@ -75,6 +82,7 @@ print_r(array_values($_SESSION));
             $_SESSION ['choixPrixParPersonne'] = $_POST['choixPrixParPersonne'];
             $_SESSION ['choixNbrePersonneMin'] = $_POST['choixNbrePersonneMin'];
             $_SESSION['choixImage'] = $_POST['choixImage'];
+            $_SESSION['choixMenuId'] = $_POST['choixMenuId'];
             }
         echo '<img src="'.$_SESSION['choixImage'].'" alt="Menu classique">';
         ?>
@@ -147,13 +155,13 @@ print_r(array_values($_SESSION));
             </div>
             <br>
             <div class = "retour-utilisateur">
-                <p> <?php echo "La commande est " . $statutCommande; ?></p>
+                <p> <?php echo $statutCommande; ?></p>
             </div>
             <!-------- enlever ceci ? 
             <br>
             <div class="div-statut">
                 <label for="div-statut" class="form-label">Statut commande&nbsp&nbsp&nbsp&nbsp</label>
-                <input type="text" id="statut" name="statut" readonly="readonly" value = "<?php echo "statut = " . $statutCommande;?>">
+                <input type="text" id="statut" name="statut" readonly="readonly" value = "<?php /*echo "statut = " . $statutCommande;*/?>">
             </div>
                  ---->
     </form>
@@ -187,15 +195,18 @@ if (!isset($_POST['nombre-personne-saisi'])){
         echo "veuillez corriger ou choisir un autre menu";
     } else {
         echo $_SESSION['statutCommande'] = "Commande validée";
-        echo "Merci, la commande est " . $_SESSION['statutCommande'];
+        /*echo "Merci, la commande est " . $_SESSION['statutCommande'];*/
         echo $_SESSION['date-livraison'] = $_POST['date-livraison'];
         echo $_SESSION['heure-livraison'] = $_POST['heure-livraison'];
         echo $_SESSION['nombre-personne-saisi'] = $_POST['nombre-personne-saisi'];
         echo $_SESSION['montant-commande'] = $_POST['nombre-personne-saisi'] * $_SESSION['choixPrixParPersonne'];
         echo $_SESSION['message-complementaire'] = $_POST['message-complementaire'];
+        echo $_SESSION['choixMenuId'] = $_POST['choixMenuId'];
 
     // ici on inscrit une nouvelle commande dans la db
-
+    
+    
+/*} else {echo "erreur id est absent de session";};*/
     // puis on propose à l'utilisateur d'aller recommander ou de voir ses commandes (vers page commande confirmée)
     ?>
     <script>window.location.replace("http:./confirmationCommande.php");</script>

@@ -6,6 +6,13 @@ if(!isset($_SESSION['email'])){
     <script>window.location.replace("http:./connexion.php");</script>
     <?php
 };
+/* debugging time!!
+/*if(isset($_SESSION['utilisateurID'])){*/
+    echo "Voici le contenu session : ";    
+    echo "identifiant utilisateur = " . $_SESSION['utilisateurID'];
+    echo "  email utilisateur = " . $_SESSION['email'];
+    echo "  statut commande = " . $_SESSION['statutCommande'];
+/*fin du debugging*/
 
 require_once(__DIR__ . '/../config/mysql.php');
 require_once(__DIR__ . '/../includes/databaseconnect.php');
@@ -47,6 +54,7 @@ require_once (__DIR__."/../includes/header.php");
 <main>
 
 <?php
+/* debug */
 echo ' ****Contenu de post:**** ';
 print_r(array_values($_POST));
 ?>
@@ -54,7 +62,7 @@ print_r(array_values($_POST));
 <?php
 echo ' ****Contenu de session:**** ';
 print_r(array_values($_SESSION));
-
+/* fin de dubug */
 ?>
 
 <h1>Commande confirmée</h1>
@@ -146,13 +154,13 @@ print_r(array_values($_SESSION));
             </div>
             <br>
             <div class = "retour-utilisateur">
-                <p>Elle sera bientôt livrée!</p>
+                <h4>Elle sera bientôt livrée!</h4>
             </div>
             <!-------- enlever ceci ? 
             <br>
             <div class="div-statut">
                 <label for="div-statut" class="form-label">Statut commande&nbsp&nbsp&nbsp&nbsp</label>
-                <input type="text" id="statut" name="statut" readonly="readonly" value = "<?php echo "statut = " . $statutCommande;?>">
+                <input type="text" id="statut" name="statut" readonly="readonly" value = "<?php /*echo "statut = " . $statutCommande;*/?>">
             </div>
                  ---->
     </form>
@@ -163,7 +171,27 @@ print_r(array_values($_SESSION));
 </main>
 
 <?php
-require_once (__DIR__."/../includes/footer.php");
+/* on écrit la commande dans la db */
+$utilisateurID = $_SESSION['utilisateurID'];
+$choixMenuId = $_SESSION['choixMenuId'];
+$dateLivraison = $_SESSION['date-livraison'];
+$heureLivraison = $_SESSION['heure-livraison'];
+$prixMenu = $_SESSION['choixPrixParPersonne'];
+$nombrePersonne = $_SESSION['nombre-personne-saisi'];
+$precisionComplementaire = $_SESSION['message-complementaire'];
+$statut = $_SESSION['statutCommande'];
+
+$sqlInsert = "INSERT INTO commande (`utilisateur_id`, `menu_id`, `date_livraison`, 
+             `heure_livraison`, `prix_menu`, `nombre_personne`, `precision_complement`, `statut`) 
+             VALUES ('$utilisateurID', '$choixMenuId', '$dateLivraison', '$heureLivraison', 
+             '$prixMenu','$nombrePersonne', '$precisionComplementaire', '$statut')";
+
+$mysqlClient->exec($sqlInsert);
+ echo " <style>h4{color:red;} </style>";
+    ?>
+        <h4>Commande bientôt livrée!</h4> 
+        
+    <?php
 ?>
 
 </body>

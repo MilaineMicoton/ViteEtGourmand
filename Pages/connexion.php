@@ -15,9 +15,14 @@ if(isset($_POST['envoi'])){
     echo $motdepasse  = $_POST['mot-de-passe'];
 
     // ********************ici on  sélectionne les données de la table utilisateur**********
-    $statement = $mysqlClient->prepare("SELECT email, password FROM utilisateur WHERE email = '$adresseMail' AND password = '$motdepasse'");
+    $statement = $mysqlClient->prepare("SELECT utilisateur_id, email, password FROM utilisateur WHERE email = '$adresseMail' AND password = '$motdepasse'");
     $statement->execute();
-    $tableUtilisateur = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $utilisateurs = $statement->fetchAll(PDO::FETCH_ASSOC);
+    // **********************récupère l'id de l'utilisateur qui est unique********************************
+    foreach ($utilisateurs as $utilisateur){
+        $utilisateurID = $utilisateur['utilisateur_id'];
+    }
+
 }  
 ?>
 <!-------------------------------le code html commence ici -------------------------->
@@ -53,9 +58,9 @@ require_once (__DIR__."/../includes/header.php");
 
 <br>
 <?php
-//********si la db ne reconnait pas la saisie en retourne l'erreur à l'utilisateur *******/
+//********si la db ne reconnait pas la saisie on retourne l'erreur à l'utilisateur *******/
 if (isset($_POST['envoi'])){
-    if (empty($tableUtilisateur)){
+    if (empty($utilisateur)){
         echo ' <style>h4{color:red;} </style>';?>
         <h4>Adresse mail ou mot de passe incorrect</h4>
        <?php } else {
@@ -67,6 +72,8 @@ if (isset($_POST['envoi'])){
             echo 'ID de session récupéré via cookie : <br>'
             .$_COOKIE['PHPSESSID']. '<br>';
         echo '<br>';}
+        $_SESSION['utilisateurID'] = $utilisateurID;
+         echo 'lutilisateur id est '.$_SESSION['utilisateurID'];
         $_SESSION['email'] = $adresseMail;
         echo 'le mail de session est '.$_SESSION['email'];
          echo ' <style>h4{color:black;} </style>';?>
