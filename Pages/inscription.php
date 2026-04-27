@@ -1,9 +1,7 @@
-<!-- inclusion des variables et fonctions --> 
 <?php
 session_start();
 require_once(__DIR__ . '/../config/mysql.php');
 require_once(__DIR__ . '/../includes/databaseconnect.php');
-
 if(isset($_POST['Envoi'])){
     // ******* si envoyé, on garde les valeurs saisies dans des variables *******
     echo $adresseMail  = $_POST['adresse-mail'];
@@ -20,7 +18,6 @@ if(isset($_POST['Envoi'])){
     $tableUtilisateur = $statement->fetchAll(PDO::FETCH_ASSOC);
 } 
 ?>
-<!-------------------------------le code html commence ici -------------------------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,8 +64,8 @@ if (isset($_POST['Envoi'])){
         $mysqlClient->exec($sqlInsert);
         echo " <style>h4{color:red;} </style>";
     ?>
-        <h4>Bienvenue à Vite et Gourmand!<br>Vous pouvez commander 
-        <a href="../pages/menus.php">nos menus</a></h4>
+        <h4>Bienvenue à Vite et Gourmand!<br>Vous pouvez vous connecter 
+        <a href="../pages/connexion.php">connexion</a></h4>
     <?php
 //********si l'adresse mail est déjà dans la db, on retourne l'erreur à l'utilisateur *******/
         } else {

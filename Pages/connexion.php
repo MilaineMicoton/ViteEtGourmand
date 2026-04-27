@@ -1,15 +1,9 @@
-<!-- inclusion des variables et fonctions --> 
 <?php
 session_start();
-
 // on récupère l'id de session s'il existe
-
 $id_session = session_id();
-
 require_once(__DIR__ . '/../config/mysql.php');
 require_once(__DIR__ . '/../includes/databaseconnect.php');
-
-
 if(isset($_POST['envoi'])){
     echo $adresseMail  = $_POST['adresse-mail'];
     echo $motdepasse  = $_POST['mot-de-passe'];
@@ -22,7 +16,6 @@ if(isset($_POST['envoi'])){
     foreach ($utilisateurs as $utilisateur){
         $utilisateurID = $utilisateur['utilisateur_id'];
     }
-
 }  
 ?>
 <!-------------------------------le code html commence ici -------------------------->
@@ -64,19 +57,18 @@ if (isset($_POST['envoi'])){
         echo ' <style>h4{color:red;} </style>';?>
         <h4>Adresse mail ou mot de passe incorrect</h4>
        <?php } else {
-        if($id_session){
+       /* *******code debug**********
+       if($id_session){
             echo 'ID de session récupéré via sessionid : <br>'
             .$id_session. '<br>';
             echo '<br>';}
         if(isset($_COOKIE['PHPSESSID'])){
             echo 'ID de session récupéré via cookie : <br>'
             .$_COOKIE['PHPSESSID']. '<br>';
-        echo '<br>';}
+        echo '<br>';}*/
         $_SESSION['utilisateurID'] = $utilisateurID;
-         echo 'lutilisateur id est '.$_SESSION['utilisateurID'];
         $_SESSION['email'] = $adresseMail;
-        echo 'le mail de session est '.$_SESSION['email'];
-         echo ' <style>h4{color:black;} </style>';?>
+        echo ' <style>h4{color:black;} </style>';?>
         <h4>Bonjour!<br>Vous pouvez commander nos
         <a href="../pages/menus.php">menus</a></h4>
         

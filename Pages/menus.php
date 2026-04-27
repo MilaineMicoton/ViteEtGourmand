@@ -3,9 +3,7 @@
 session_start();
 require_once(__DIR__ . '/../config/mysql.php');
 require_once(__DIR__ . '/../includes/databaseconnect.php');
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,7 +78,10 @@ foreach ($allMenus as $oneMenu)
             <input type="hidden" name="choixNbrePersonneMin" value='<?php echo "$choixNbrePersonneMin"?>'/>
             <input type="hidden" name="choixMenuId" value='<?php echo "$choixMenuId"?>'/>
             <input type="hidden" name="statutCommande" value='Nouvelle Commande'>
-            <?php $_SESSION['statutCommande'] = "Nouvelle Commande";?>
+            <?php 
+            $_SESSION['statutCommande'] = "Nouvelle Commande";
+            $_SESSION['choixMenuId'] = $choixMenuId;
+            ?>
 
 
 
@@ -98,7 +99,8 @@ foreach ($allMenus as $oneMenu)
     <?php
     }
 ?> 
-</div>d
+</div>
+<!----
 <div class="wrapper-les-menus">
 
     <div class="cadre-menu">
@@ -152,7 +154,7 @@ foreach ($allMenus as $oneMenu)
             <button class="bouton-commander" type="button">Commander</button>
         </article>
     </div>
-</div>
+</div> -->
 </main>
 
 <?php

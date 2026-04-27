@@ -1,10 +1,30 @@
--- Création de la BDD à modifier pour viteetgourmand !!!!! ne pas oublier!--------
-CREATE DATABASE IF NOT EXISTS `viteetgourmand`;
-USE `viteetgourmand`;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : lun. 27 avr. 2026 à 15:22
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 
 --
 -- Base de données : `viteetgourmand`
 --
+-- Création de la BDD à modifier pour viteetgourmand !!!!! ne pas oublier!--------
+
+CREATE DATABASE IF NOT EXISTS `viteetgourmand`;
+USE `viteetgourmand`;
 
 -- --------------------------------------------------------
 
@@ -12,34 +32,36 @@ USE `viteetgourmand`;
 -- Structure de la table `commande`
 --
 
-CREATE TABLE `commande` (
+CREATE TABLE IF NOT EXISTS `commande` (
   `commande_id` int(11) NOT NULL,
   `utilisateur_id` int(11) NOT NULL,
-  `menu_id` INT(11) NOT NULL,
+  `menu_id` int(11) NOT NULL,
   `date_commande` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `date_livraison` date NOT NULL,
   `heure_livraison` varchar(50) NOT NULL,
   `prix_menu` double NOT NULL,
   `nombre_personne` int(11) NOT NULL,
-  `precision_complement` varchar(70) NOT NULL,
+  `precision_complement` varchar(70) DEFAULT NULL,
   `statut` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- faire table rase si elle existait déjà
 
 delete from `commande`;
-
 --
 -- Déchargement des données de la table `commande`
 --
--- ************************* A REMPLIR ICI:::::::: les données de 'commande' ***********
+
 INSERT INTO `commande` (`commande_id`, `utilisateur_id`, `menu_id`, `date_commande`, `date_livraison`, `heure_livraison`, `prix_menu`, `nombre_personne`, `precision_complement`, `statut`) VALUES
-(1, 2, 1, '2026-03-18 09:24:57', '2026-05-31', '11h', 12, 2, '', 'Commande validée');
+(12, 1, 1, '2026-04-27 13:19:16', '2026-04-06', '16:18', 12, 2, 'première commande', 'Commande validée'),
+(13, 1, 2, '2026-04-27 13:20:18', '2026-03-30', '16:20', 22, 3, '2eme commande', 'Commande validée'),
+(14, 4, 5, '2026-04-27 13:21:27', '2026-03-30', '17:21', 18, 1, '3eme commande', 'Commande validée');
 
 -- --------------------------------------------------------
+
 --
 -- Structure de la table `menu`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `menu` (
   `menu_id` int(11) NOT NULL,
@@ -57,10 +79,6 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `url_photo` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- faire table rase si elle existait déjà
-
-delete from `menu`;
-
 --
 -- Déchargement des données de la table `menu`
 --
@@ -72,33 +90,34 @@ INSERT INTO `menu` (`menu_id`, `titre`, `sous_titre`, `nbre_personne-min`, `prix
 (6, 'Le veggie', 'menu végérarien', 2, 18, 'végétarien', 'Entrée crudités et yahourt', 'Lentilles corail', 'Burger vegétarien', 'Potatoes', 'Café gourmand', 8, '../images/hex-9452616_640.jpg');
 
 -- --------------------------------------------------------
+-- faire table rase si elle existait déjà
 
+delete from `menu`;
 --
 -- Structure de la table `utilisateur`
 --
 
 CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `utilisateur id` int(11) NOT NULL,
+  `utilisateur_id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `telephone` int(50) NOT NULL,
-  `ville` int(50) NOT NULL,
-  `adresse` int(50) NOT NULL
+  `ville` varchar(50) NOT NULL,
+  `adresse` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- faire table rase si elle existait déjà
 
 delete from `utilisateur`;
-
 --
 -- Déchargement des données de la table `utilisateur`
 --
--- ************************* A REMPLIR ICI:::::::: les données de 'utilisateur' ***********
 
-
--- --------------------------------------------------------
+INSERT INTO `utilisateur` (`utilisateur_id`, `email`, `password`, `nom`, `prenom`, `telephone`, `ville`, `adresse`) VALUES
+(1, 'test@test.fr', 'test', 'Knight', 'Marie-Hélène', 505050505, 'Saint Céré', 'rue des arbres bleus'),
+(4, 'frodo@baggins.fr', 'test', 'Baggins', 'Frodo', 88888888, 'Villedereves', 'Royaume des Elfes');
 
 --
 -- Index pour les tables déchargées
@@ -120,8 +139,7 @@ ALTER TABLE `menu`
 -- Index pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD PRIMARY KEY (`utilisateur id`);
-
+  ADD PRIMARY KEY (`utilisateur_id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -131,7 +149,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `commande_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `commande_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `menu`
@@ -143,7 +161,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `utilisateur id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `utilisateur_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

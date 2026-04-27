@@ -8,12 +8,12 @@ if(!isset($_SESSION['email'])){
 };
 /* debugging time!!
 /*if(isset($_SESSION['utilisateurID'])){*/
-    echo "Voici le contenu session : ";    
-    echo "identifiant utilisateur = " . $_SESSION['utilisateurID'];
-    echo "  email utilisateur = " . $_SESSION['email'];
-    echo "  statut commande = " . $_SESSION['statutCommande'];
+    echo "<br>Voici le contenu session : ";  
+    echo "<br>identifiant utilisateur = " . $_SESSION['utilisateurID'];
+    echo "<br>  email utilisateur = " . $_SESSION['email'];
+    echo "<br>  statut commande = " . $_SESSION['statutCommande'];
+    echo "<br> menu id = " . $_SESSION['choixMenuId'];
 /*} else {echo "erreur id est absent de session";};*/
-
 require_once(__DIR__ . '/../config/mysql.php');
 require_once(__DIR__ . '/../includes/databaseconnect.php');
 
@@ -52,17 +52,6 @@ require_once (__DIR__."/../includes/header.php");
 ?>
 
 <main>
-
-<?php
-echo ' ****Contenu de post:**** ';
-print_r(array_values($_POST));
-?>
-<br>
-<?php
-echo ' ****Contenu de session:**** ';
-print_r(array_values($_SESSION));
-
-?>
 
 <h1>Votre nouvelle commande</h1>
 
@@ -201,7 +190,6 @@ if (!isset($_POST['nombre-personne-saisi'])){
         echo $_SESSION['nombre-personne-saisi'] = $_POST['nombre-personne-saisi'];
         echo $_SESSION['montant-commande'] = $_POST['nombre-personne-saisi'] * $_SESSION['choixPrixParPersonne'];
         echo $_SESSION['message-complementaire'] = $_POST['message-complementaire'];
-        echo $_SESSION['choixMenuId'] = $_POST['choixMenuId'];
 
     // ici on inscrit une nouvelle commande dans la db
     
