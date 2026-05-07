@@ -1,9 +1,6 @@
-<!-- inclusion des variables et fonctions --> 
 <?php
 session_start();
-require_once(__DIR__ . '/../config/mysql.php');
-require_once(__DIR__ . '/../includes/databaseconnect.php');
-?>
+echo '<p style="position: absolute; z-index: -99;">&nbsp</p>';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,51 +17,42 @@ require_once(__DIR__ . '/../includes/databaseconnect.php');
     <link rel="icon" href="data;,">
 </head>
 <body>
-
-  <?php
+<?php
 // *************************** le header **************************
 require_once (__DIR__."/../includes/header.php");
 ?>
-
 <main>
 <h1>Nos menus</h1>
 <div class="wrapper-les-menus">
-    <?php
-
+<?php
+require_once(__DIR__ . '/../includes/databaseconnect.php');
 // ********************ici on  sélectionne les données de la table menu**********
 $statement = $mysqlClient->prepare ("SELECT * FROM menu LIMIT 10");
 $statement->execute();
-$allMenus = $statement->fetchAll(PDO::FETCH_ASSOC);
+$allMenus = $statement->fetchAll(PDO::FETCH_ASSOC);?>
+<?php
 // ****************************afficher les menus un à un**************************
-   ?>
-
-   <?php 
-foreach ($allMenus as $oneMenu)  
-    {?>
-
+foreach ($allMenus as $oneMenu) {?>
     <div class="cadre-menu">
-        <?php echo $choixImage='<img src="'.$oneMenu['url_photo'].'" alt="Menu classique">'?>
+        <?php echo $choixImage='<img src="'.$oneMenu['url_photo'].'" alt="Menu classique">';?>
         <article>
-            <h2><?php echo $choixTitre = $oneMenu['titre'] ?></h2>
+            <h2><?php echo $choixTitre = $oneMenu['titre'];?></h2>
             <br>
-            <p><?php echo $choixSousTitre = $oneMenu['sous_titre'] ?><br>
+            <p><?php echo $choixSousTitre = $oneMenu['sous_titre'];?><br>
             <br>
-            <?php echo $choixLigne1 = $oneMenu['menu_ligne1'] ?><br>
-            <?php echo $choixLigne2 = $oneMenu['menu_ligne2'] ?><br>
-            <?php echo $choixLigne3 = $oneMenu['menu_ligne3'] ?><br>
-            <?php echo $choixLigne4 = $oneMenu['menu_ligne4'] ?><br>
-            <?php echo $choixLigne5 = $oneMenu['menu_ligne5'] ?></p>
+            <?php echo $choixLigne1 = $oneMenu['menu_ligne1'];?><br>
+            <?php echo $choixLigne2 = $oneMenu['menu_ligne2'];?><br>
+            <?php echo $choixLigne3 = $oneMenu['menu_ligne3'];?><br>
+            <?php echo $choixLigne4 = $oneMenu['menu_ligne4'];?><br>
+            <?php echo $choixLigne5 = $oneMenu['menu_ligne5'];?></p>
             <br>
-
         <!-- on insère ici les autres éléments du menu à faire passer -->
-
         <?php
         $choixImage = $oneMenu['url_photo'];
         $choixPrixParPersonne = $oneMenu['prix_par_personne'];
         $choixNbrePersonneMin = $oneMenu['nbre_personne-min'];
         $choixMenuId = $oneMenu['menu_id'];
         ?>
-
         <form method="post" action="passerCommande.php">
             <input type="hidden" name="choixImage" value='<?php echo "$choixImage"?>'/>
             <input type="hidden" name="choixTitre" value='<?php echo "$choixTitre"?>'/>
@@ -82,9 +70,6 @@ foreach ($allMenus as $oneMenu)
             $_SESSION['statutCommande'] = "Nouvelle Commande";
             $_SESSION['choixMenuId'] = $choixMenuId;
             ?>
-
-
-
         </article>
             <div class = "ligne-prix-bouton">
                 <p class="prix">par personne: <?php echo $oneMenu['prix_par_personne'] ?>€<br>
@@ -95,71 +80,13 @@ foreach ($allMenus as $oneMenu)
             </div>
         </form>
     </div>
- 
     <?php
     }
 ?> 
 </div>
-<!----
-<div class="wrapper-les-menus">
-
-    <div class="cadre-menu">
-        <img src="../images/circles-9451627_640.jpg" alt="Menu classique">
-        <article>
-            <h2>Menu "Le classique"</h2>
-            <p>un repas traditionnel<br>
-            soupe<br>viande<br>légumes<br>fromage<br>dessert</p>
-            
-        </article>
-        <h3>prix du menu</h3>
-            <button class="bouton-commander" type="button">Commander</button>
-    </div>
-
-    <div class="cadre-menu">
-        <img src="../images/hearts-9463310_640.jpg" alt="Menu 2">
-        <article>
-            <h2>Le gourmand</h2>
-            <p>pour les bons appétits</p>
-            <p>prix du menu</p>
-            <button class="bouton-commander" type="button">Commander</button>
-        </article>
-    </div>
-
-    <div class="cadre-menu">
-        <img src="../images/hearts-9463312_640.jpg" alt="Menu 3">
-        <article>
-            <h2>La ligne en vue</h2>
-            <p>Pour garder la ligne</p>
-            <p>prix du menu</p>
-            <button class="bouton-commander" type="button">Commander</button>
-        </article>
-    </div>
-
-    <div class="cadre-menu">
-        <img src="../images/hex-9452616_640.jpg" alt="Menu 4">
-        <article>
-            <h2>Menu 1</h2>
-            <p>descriptif du menu</p>
-            <p>prix du menu</p>
-            <button class="bouton-commander" type="button">Commander</button>
-        </article>
-    </div>
-
-    <div class="cadre-menu">
-        <img src="../images/pattern-9468319_640.jpg" alt="Menu 5">
-        <article>
-            <h2>Menu 5</h2>
-            <p>descriptif du menu</p>
-            <p>prix du menu</p>
-            <button class="bouton-commander" type="button">Commander</button>
-        </article>
-    </div>
-</div> -->
 </main>
-
 <?php
 require_once (__DIR__."/../includes/footer.php");
 ?>
-
 </body>
 </html>

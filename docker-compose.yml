@@ -1,0 +1,37 @@
+
+services:
+  nginx:
+    image: nginx:stable-alpine3.23-perl
+    ports:
+      - "8080:80"
+    volumes:
+      - ./code:/code
+      - ./nginx.conf:/etc/nginx/nginx.conf
+  php:
+    # cette ligne remplacée  pr code ci-dessous >>>>> image: php:8.2.30-fpm-alpine3.23
+    #ici on invoque le Dockerfile en faisant un build, 
+    #car il faut aussi installer les extensions mysqli et PDO pour accéder à la db
+    build: .
+    volumes:
+      - ./code:/code
+  mysql:
+    image: mysql:8
+    environment:
+    # changer les mots de passe en production!!!!!
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: viteetgourmand
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - dbdata:/var/lib/mysql
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8081:80"
+
+volumes:
+  dbdata:

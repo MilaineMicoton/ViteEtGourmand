@@ -1,12 +1,12 @@
 <?php
 session_start();
+echo '<p style="position: absolute; z-index: -99;">&nbsp</p>';
 // on récupère l'id de session s'il existe
 $id_session = session_id();
-require_once(__DIR__ . '/../config/mysql.php');
 require_once(__DIR__ . '/../includes/databaseconnect.php');
 if(isset($_POST['envoi'])){
-    echo $adresseMail  = $_POST['adresse-mail'];
-    echo $motdepasse  = $_POST['mot-de-passe'];
+    $adresseMail  = $_POST['adresse-mail'];
+    $motdepasse  = $_POST['mot-de-passe'];
 
     // ********************ici on  sélectionne les données de la table utilisateur**********
     $statement = $mysqlClient->prepare("SELECT utilisateur_id, email, password FROM utilisateur WHERE email = '$adresseMail' AND password = '$motdepasse'");

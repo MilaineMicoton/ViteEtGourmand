@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once(__DIR__ . '/../config/mysql.php');
+echo '<p style="position: absolute; z-index: -99;">&nbsp</p>';
 require_once(__DIR__ . '/../includes/databaseconnect.php');
 if(isset($_POST['Envoi'])){
     // ******* si envoyé, on garde les valeurs saisies dans des variables *******

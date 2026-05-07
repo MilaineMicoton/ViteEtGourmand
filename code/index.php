@@ -1,10 +1,7 @@
 <?php
-// ceci est pour débugger uniquement, à remplacer par une limite sur le temps de session ou des variables? à étudier*****
 session_start();
 session_unset();
-echo 'session (re)démarrée, mais variables de session détruites';
-// fin deboggage 
-?>
+echo '<p style="position: absolute; z-index: -99;">&nbsp</p>';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,18 +23,5 @@ require_once (__DIR__."/includes/header.php");
 require_once (__DIR__."/includes/home.php");
 require_once (__DIR__."/includes/footer.php");
 ?>
-
 </body>
-<!-- comment 
- 
-
-session_start();
-require_once(__DIR__ . '/config/mysql.php');
-require_once(__DIR__ . '/includes/databaseconnect.php');
-
-
-?>
-
-
--->
 </html>

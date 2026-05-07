@@ -1,3 +1,6 @@
+<?php
+session_start();
+echo '<p style="position: absolute; z-index: -99;">&nbsp</p>';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
