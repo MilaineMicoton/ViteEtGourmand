@@ -1,7 +1,7 @@
 <?php
-$servername = "mysql";
+$servername = "db";
 $username = "user";
-$password = "password";
+$password = "costaud&";
 $dbname = "viteetgourmand";
 try {
     $mysqlClient = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -10,5 +10,4 @@ try {
 } catch (Exception $exception) {
     echo "connexion error";
 
-    die('Erreur : ' . $exception->getMessage());
-}
+    die('Erreur : ' . $exception->getMessage());}
