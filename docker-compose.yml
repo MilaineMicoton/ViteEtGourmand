@@ -55,6 +55,3 @@ services:
 volumes:
   dbdata:
 
-networks:
-  traefik-proxy:
-    external: true
