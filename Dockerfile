@@ -1,9 +1,7 @@
-#Etape 1. Récupérer l'image php-apache (AS php-apache()
-FROM php:8.2-apache 
+FROM php:8.2-apache
 
-# Installer les extensions
 RUN docker-php-ext-install mysqli pdo pdo_mysql
-
 RUN a2enmod rewrite
 
-COPY ./code/ /var/www/html/
+COPY code/ /var/www/html/
+RUN chown -R www-data:www-data /var/www/html
