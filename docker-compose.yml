@@ -6,7 +6,7 @@ services:
       DB_HOST: db
       DB_NAME: viteetgourmand
       DB_USER: user
-      DB_PASSWORD: costaud&
+      DB_PASSWORD: costaud123
     depends_on:
       - db
     labels:
@@ -23,10 +23,10 @@ services:
     image: mysql:8.0
     container_name: mydb
     environment:
-      MYSQL_ROOT_PASSWORD: costaud&
+      MYSQL_ROOT_PASSWORD: costaud123
       MYSQL_DATABASE: viteetgourmand
       MYSQL_USER: user
-      MYSQL_PASSWORD: costaud&
+      MYSQL_PASSWORD: costaud123
     volumes:
       - dbdata:/var/lib/mysql
     networks:
@@ -39,7 +39,7 @@ services:
       - db
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: costaud&
+      MYSQL_ROOT_PASSWORD: costaud123
     labels:
       - traefik.enable=true
       - traefik.http.routers.pma.rule=Host(`pma.mon-ecf-veg.pro`)
