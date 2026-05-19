@@ -118,6 +118,7 @@ delete from `utilisateur`;
 
 INSERT INTO `utilisateur` (`utilisateur_id`, `email`, `password`, `nom`, `prenom`, `telephone`, `ville`, `adresse`) VALUES
 (1, 'test@test.fr', 'test', 'Knight', 'Marie-Hélène', 505050505, 'Saint Céré', 'rue des arbres bleus'),
+(2, 'admin@fastdev.fr', 'admin', 'Développeuse', 'Marie-Hélène', 505050505, 'Saint Céré', 'FastDev'),
 (4, 'frodo@baggins.fr', 'test', 'Baggins', 'Frodo', 88888888, 'Villedereves', 'Royaume des Elfes');
 
 --
