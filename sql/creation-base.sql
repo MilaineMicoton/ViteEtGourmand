@@ -105,7 +105,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `prenom` varchar(50) NOT NULL,
   `telephone` int(50) NOT NULL,
   `ville` varchar(50) NOT NULL,
-  `adresse` varchar(50) NOT NULL
+  `adresse` varchar(50) NOT NULL,
+  'type_utilisateur' varchar(10) NOT NULL,
+  'compte_etat' varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- faire table rase si elle existait déjà
@@ -116,8 +118,9 @@ delete from `utilisateur`;
 --
 
 INSERT INTO `utilisateur` (`utilisateur_id`, `email`, `password`, `nom`, `prenom`, `telephone`, `ville`, `adresse`) VALUES
-(1, 'test@test.fr', 'test', 'Knight', 'Marie-Hélène', 505050505, 'Saint Céré', 'rue des arbres bleus'),
-(4, 'frodo@baggins.fr', 'test', 'Baggins', 'Frodo', 88888888, 'Villedereves', 'Royaume des Elfes');
+(1, 'test@test.fr', 'test', 'Knight', 'Marie-Hélène', 505050505, 'Saint Céré', 'rue des arbres bleus', 'client','valide'),
+(4, 'frodo@baggins.fr', 'test', 'Baggins', 'Frodo', 88888888, 'Villedereves', 'Royaume des Elfes','admin','valide')
+(6, 'marieheleneknight46@gmail.com','test','Knight','Marie-Hélène', 787305172, 'Latronquière','Royaume des Francs','employe','valide');
 
 --
 -- Index pour les tables déchargées

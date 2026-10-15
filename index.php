@@ -18,13 +18,13 @@ echo 'session (re)démarrée, mais variables de session détruites';
 
 
 <!-- empty data URI to prevent the browser from getting the favicon file and showing 404-->
-    <link rel="icon" href="data;,">
+  <!--  <link rel="icon" href="data;,"> -->
 </head>
 <body>
   <?php
-require_once (__DIR__."/includes/header.php");
+require_once (__DIR__."/includes/headerIndex.php");
 require_once (__DIR__."/includes/home.php");
-require_once (__DIR__."/includes/footer.php");
+require_once (__DIR__."/includes/footerIndex.php");
 ?>
 
 </body>

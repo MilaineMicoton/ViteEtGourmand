@@ -17,8 +17,9 @@
         <br>
         <br>
             <div class="bouton-menus">
-                <a href="../pages/menus.php">Les menus</a>         
+                <a href="pages/menus.php">Les menus</a>       
             </div>
+            
         <br>
         <br>
         <h2>Notre motto: goût, fraîcheur et rapidité</h2>
