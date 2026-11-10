@@ -11,6 +11,8 @@ if(isset($_POST['Envoi'])){
     echo $telephone = $_POST['telephone'];
     echo $adresse = $_POST['adresse-postale'];
     echo $ville = $_POST['ville'];
+    echo $typeUtilisateur = "client";
+    echo $compteEtat = "valide";
 
     // ********************on recherche la table utilisateur pour une entrée existante avec cette adresse mail **********
     $statement = $mysqlClient->prepare("SELECT email FROM utilisateur WHERE email = '$adresseMail'");
@@ -59,8 +61,8 @@ require_once (__DIR__."/../includes/header.php");
 //********si l'adresse mail est nouvelle, on inscrit l'utilisateur et on confirme à l'écran  *******/
 if (isset($_POST['Envoi'])){
     if (empty($tableUtilisateur)){
-        $sqlInsert = "INSERT INTO utilisateur (email, password, nom, prenom, telephone, ville, adresse) 
-        VALUES ('$adresseMail', '$motdepasse', '$nom', '$prenom', '$telephone', '$ville', '$adresse')";
+        $sqlInsert = "INSERT INTO utilisateur (email, password, nom, prenom, telephone, ville, adresse, type_utilisateur, compte_etat) 
+        VALUES ('$adresseMail', '$motdepasse', '$nom', '$prenom', '$telephone', '$ville', '$adresse', '$typeUtilisateur', '$compteEtat')";
         $mysqlClient->exec($sqlInsert);
         echo " <style>h4{color:red;} </style>";
     ?>

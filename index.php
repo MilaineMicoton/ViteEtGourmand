@@ -1,9 +1,9 @@
 <?php
-// ceci est pour débugger uniquement, à remplacer par une limite sur le temps de session ou des variables? à étudier*****
+// à l'atterissage, les variables de session sont invariablement détruites *****
 session_start();
 session_unset();
-echo 'session (re)démarrée, mais variables de session détruites';
-// fin deboggage 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

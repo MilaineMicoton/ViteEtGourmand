@@ -2,21 +2,30 @@
 session_start();
 // on récupère l'id de session s'il existe
 $id_session = session_id();
+
 require_once(__DIR__ . '/../config/mysql.php');
 require_once(__DIR__ . '/../includes/databaseconnect.php');
+
 if(isset($_POST['envoi'])){
     echo $adresseMail  = $_POST['adresse-mail'];
     echo $motdepasse  = $_POST['mot-de-passe'];
+    echo $typeUtilisateur = $_POST['type-utilisateur'];
+    
 
     // ********************ici on  sélectionne les données de la table utilisateur**********
-    $statement = $mysqlClient->prepare("SELECT utilisateur_id, email, password FROM utilisateur WHERE email = '$adresseMail' AND password = '$motdepasse'");
+    $statement = $mysqlClient->prepare("SELECT utilisateur_id, email, password, type_utilisateur, compte_etat FROM utilisateur WHERE email = '$adresseMail' AND password = '$motdepasse'");
     $statement->execute();
     $utilisateurs = $statement->fetchAll(PDO::FETCH_ASSOC);
     // **********************récupère l'id de l'utilisateur qui est unique********************************
     foreach ($utilisateurs as $utilisateur){
         $utilisateurID = $utilisateur['utilisateur_id'];
+        $typeUtilisateur = $utilisateur['type_utilisateur'];
+        $compteEtat = $utilisateur['compte_etat'];
+        
     }
-}  
+    } 
+    else {echo $typeUtilisateur = "blog";}
+  
 ?>
 <!-------------------------------le code html commence ici -------------------------->
 <!DOCTYPE html>
@@ -31,16 +40,22 @@ if(isset($_POST['envoi'])){
     <link rel="stylesheet" href="../CSS/home.css">
     <link rel="stylesheet" href="../CSS/connexion.css">
 
+     
+
 <!-- empty data URI to prevent the browser from getting the favicon file and showing 404-->
     <link rel="icon" href="data;,">
 </head>
 <body>
 
   <?php
-require_once (__DIR__."/../includes/header.php");
+if ($typeUtilisateur === "employe" || $typeUtilisateur === "admin") {
+    require_once (__DIR__."/../includes/headerTB.php"); 
+} else {
+    require_once (__DIR__."/../includes/header.php");
+}
 
 ?>
-
+<!-- <script src="../javascript/accesTB.js"></script>-->
 <main>
 <div class="login-wrapper">
 <section class="login">
@@ -57,23 +72,25 @@ if (isset($_POST['envoi'])){
         echo ' <style>h4{color:red;} </style>';?>
         <h4>Adresse mail ou mot de passe incorrect</h4>
        <?php } else {
-       /* *******code debug**********
-       if($id_session){
-            echo 'ID de session récupéré via sessionid : <br>'
-            .$id_session. '<br>';
-            echo '<br>';}
-        if(isset($_COOKIE['PHPSESSID'])){
-            echo 'ID de session récupéré via cookie : <br>'
-            .$_COOKIE['PHPSESSID']. '<br>';
-        echo '<br>';}*/
+        if ($compteEtat === "supprime"){
+            echo ' <style>h4{color:red;} </style>';?>
+            <h4>Désolé, votre compte a été supprimé</h4>
+       <?php } else {
+       
         $_SESSION['utilisateurID'] = $utilisateurID;
         $_SESSION['email'] = $adresseMail;
+        $_SESSION['typeUtilisateur'] = $typeUtilisateur;
+        $_SESSION['compteEtat'] = $compteEtat;
         echo ' <style>h4{color:black;} </style>';?>
+       
         <h4>Bonjour!<br>Vous pouvez commander nos
-        <a href="../pages/menus.php">menus</a></h4>
-        
+        <a href="../pages/menus.php">menus</a>
+        <br>
+       
         <?php
-    }};
+        
+            }
+}};
 ?>
 
 <br>
@@ -114,7 +131,11 @@ if (isset($_POST['envoi'])){
                         <span>Pas de compte?</span>
                             <a href="inscription.php">Inscrivez-vous</a>
                          </div>
-                        
+ <!-- champ invisible pour véhiculer le type d'utilisateur au JS --> 
+                              
+                        <input type="text" id="type-utilisateur" name="type-utilisateur" required
+                        hidden  size="10" value ="<?php echo $typeUtilisateur; ?>">  
+                                           
 
                     </form>
 

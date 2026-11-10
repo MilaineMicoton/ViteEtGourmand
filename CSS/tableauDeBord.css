@@ -1,0 +1,146 @@
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: left;
+}
+
+.tableau-bord {
+  border: 2px solid rgb(95 97 110);
+  border-radius: 0.5em;
+  padding: 20px;
+  width: auto;
+  background-color: #eab993;
+}
+
+.TB-wrapper {
+  font: 1.2em sans-serif;
+  padding:20px 0 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.afficher-trier-en-ligne {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.ligne-ajouter {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* les boutons */
+.div-bouton-envoyer {
+    width:100px;
+    height:30px;
+    border-radius: 10px;
+    background-color:#004160;
+    text-align: center;
+    padding:0px 0 0 0;  
+    margin-left: 320px;
+}
+
+.div-bouton-envoyer > button {
+    text-decoration: none;
+    border:0;
+    background-color:#004160;
+    color: white;
+    padding:0;
+}
+
+.ajouter-un-menu {
+    width:100px;
+    height:30px;
+    border-radius: 10px;
+    background-color:#004160;
+    text-align: center;
+    padding:0px 0 0 0;  
+}
+
+.ajouter-un-menu > a {
+    text-decoration: none;
+    border:0;
+    background-color:#004160;
+    color: white;
+    padding:0;
+    font-size: small;
+}
+*/
+.submit-button {
+  margin: 0 36% 0 36%;
+}
+
+.submit-button > input {
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  border-radius: 10px;
+  background-color:#004160;
+  background-image: linear-gradient(
+    to top left,
+    rgb(0 0 0 / 0.2),
+    rgb(0 0 0 / 0.2) 30%,
+    transparent
+  );
+  box-shadow:
+    inset 2px 2px 3px rgb(255 255 255 / 0.6),
+    inset -2px -2px 3px rgb(0 0 0 / 0.6);
+}
+
+.styled:hover {
+  background-color: rgb(105, 6, 6);
+}
+
+.styled:active {
+  box-shadow:
+    inset -2px -2px 3px rgb(255 255 255 / 0.6),
+    inset 2px 2px 3px rgb(0 0 0 / 0.6);
+}
+
+/*********************** message saisie incorrecte ***********/
+h4 {
+  color:#eab993;
+}
+
+/**************************************les média queries*******/
+@media screen and (width <=800px) {
+body {
+    margin: 0 40px 0 40px;
+}
+.tableau-bord {
+    width: 70%;
+}
+}
+
+@media screen and (width<= 426px) {
+body {
+    margin: 0 20px 0 20px;
+}
+h1 {
+    font-size: 1 rem;
+}
+
+.tableau-bord {
+  width: 100%;
+}
+.submit-button {
+  margin: 0 30% 0 30%;
+}
+.afficher-trier-en-ligne {
+  display:block;
+}
+.grid-item {
+  padding-left: 20px;
+}
+.grid-text {
+  padding-left: 0;
+}
+
+}

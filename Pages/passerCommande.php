@@ -11,6 +11,7 @@ if(!isset($_SESSION['email'])){
     echo "<br>Voici le contenu session : ";  
     echo "<br>identifiant utilisateur = " . $_SESSION['utilisateurID'];
     echo "<br>  email utilisateur = " . $_SESSION['email'];
+    echo "<br>type utilisateur = " . $_SESSION['typeUtilisateur'];
  //   echo "<br>  statut commande = " . $_SESSION['statutCommande'];
 // echo "<br> menu id = " . $_SESSION['choixMenuId'];
 /*} else {echo "erreur id est absent de session";};*/
@@ -58,7 +59,7 @@ require_once (__DIR__."/../includes/header.php");
 
 <!-- puis on affiche le "cadre-commande" à remplir -->
     <div class="cadre-commande">
-    <form  id="ma-commande" action="" method="post">
+        <form  id="ma-commande" action="" method="post">
             <h2 class= "titre-commande"> Complétez votre commande</h2>
             <br>
             <div class="div-mail">
@@ -119,15 +120,16 @@ require_once (__DIR__."/../includes/header.php");
             </div>
             <br>
             <div id="changer-boutons">
-               <div id="div-bouton-valider" class ="bouton-valider">
+               <div id="div-bouton-valider">
                    <button type='button'
                          class="bouton-valider"
+                         style="color:white;"
                          onclick='return valider()'>Valider</button>
                </div>
             </div>
             <br>
             <div class= "retour-utilisateur"></div>
-            <div id="params-php">
+            <div id="params-php" style="opacity:0;">
                 
                 <input type=text
                         id="statut-commande" 
@@ -147,12 +149,12 @@ require_once (__DIR__."/../includes/header.php");
                 <input type=text
                         id="utilisateurID" 
                         name="utilisateurID" 
-                        value="<?php echo $_SESSION['utilisateurID'];?>"
+                        value="<?php echo $_SESSION['utilisateurID']; ?>"
                         >
                         
             </div>
 
-    </form>
+        </form>
     </div>   
 </div>
 </main>

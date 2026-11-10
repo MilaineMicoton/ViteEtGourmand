@@ -1,0 +1,4 @@
+.aligne-champ {
+    display: flex;
+    justify-content:space-between;
+}

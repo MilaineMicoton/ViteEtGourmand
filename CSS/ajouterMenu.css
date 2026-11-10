@@ -1,0 +1,50 @@
+.ligne-prix-min {
+    display: flex;
+    justify-content: space-between;
+    text-align: end;
+}
+.ligne-prix-min > input {
+    text-align: end;
+}
+.telecharger-image {
+    width: 180px;
+    padding: 0 10px 0 10px;
+}
+.div-h1 {
+    width: 180px;
+    padding: 0 10px 0 10px;
+}
+.div-h1 > h1 {
+    font-size-adjust: 0.45;
+}
+/**************************************les média queries*******/
+/*
+@media screen and (width <=800px) {
+body {
+    margin: 0 40px 0 40px;
+}
+.login {
+    width: 70%;
+}
+} */
+
+@media screen and (width >= 760px) {
+
+.telecharger-image {
+    width: 300px;
+    padding: 0 20px 0 20px;
+}
+.div-h1 {
+    width: 300px;
+    padding: 0 20px 0 20px;
+}
+.div-h1 > h1 {
+    font-size-adjust: 0.70;
+}
+label {
+    font-size-adjust: 0.6;
+}
+.submit-button {
+  margin: 0 40% 0 40%;
+}
+}

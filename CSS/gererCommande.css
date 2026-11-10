@@ -1,0 +1,11 @@
+textarea {
+    width: 300px;
+    height: auto;
+    text-align: left;
+
+    box-sizing: content-box;
+    
+}
+.cadre-commande {
+    background-color: #eab993;
+}

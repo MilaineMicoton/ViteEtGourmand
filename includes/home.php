@@ -27,7 +27,7 @@
     </div>
 
     <div class="avis">
-        <p>ici on mettra les avis</p>
+        <p></p>
     </div>
 </div>
 
